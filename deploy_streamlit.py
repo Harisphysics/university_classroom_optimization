@@ -571,3 +571,6 @@ elif st.session_state.run_job :
             st.dataframe(select_df)
             st.write("-----------")
 
+        unscheduled_df = pd.DataFrame(unscheduled, columns=["Unscheduled Course"])
+        st.write("Unschedule Course")
+        st.dataframe(unscheduled_df)
