@@ -567,7 +567,7 @@ elif st.session_state.run_job :
             select_df["index"] = select_df["index"] + "_" + select_df["Instructor"]
             select_df = select_df.drop(["Day","Instructor"], axis=1)
             select_df = select_df.pivot(index="Room", columns="Time", values="index")
-            st.write(f"Schedule for Day : D[i]")
+            st.write(f"Schedule for Day : {D[i]}")
             st.dataframe(select_df)
             st.write("-----------")
 
