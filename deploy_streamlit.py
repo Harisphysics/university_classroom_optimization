@@ -4,7 +4,7 @@ import random
 from ortools.sat.python import cp_model
 
 # Load the data
-def load_data():
+def create_data():
     df_Course = pd.read_excel("data/input_data.xlsx", sheet_name="Courses")
     D = pd.read_excel("data/input_data.xlsx", sheet_name="Days")
     T = pd.read_excel("data/input_data.xlsx", sheet_name="Time")
@@ -234,7 +234,7 @@ def solve_university_class_scheduling(C, D, T, R, I, enrollment, instructor,
         print("No optimal solution found.")
         return None
 
-data = load_data()
+data = create_data()
 
 if 'generated_data' not in st.session_state:
     st.session_state.generated_data = True
