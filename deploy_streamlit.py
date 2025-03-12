@@ -384,7 +384,7 @@ elif st.session_state.view_data :
     dummy_data = load_dummy()
     st.title("View Data")
     st.write(f"Selected tab: {selected_tab}")
-    st.datafrane(dummy_data[selected_tab])
+    st.dataframe(dummy_data[selected_tab])
 
 elif st.session_state.run_job :
     with st.spinner("Optimization is running...") :
