@@ -559,14 +559,15 @@ elif st.session_state.run_job :
 
         df_result = pd.DataFrame(result, index=["Day", "Time", "Room", "Instructor"]).T
         df_result = df_result.reset_index()
-
+        st.write("Optimization completed")
+        
+        st.title("Optimization Result")
         for i in range(5) :
             select_df = df_result[df_result["Day"] == D[i]].reset_index(drop=True)
             select_df["index"] = select_df["index"] + "_" + select_df["Instructor"]
             select_df = select_df.drop(["Day","Instructor"], axis=1)
             select_df = select_df.pivot(index="Room", columns="Time", values="index")
-            print(D[i])
-            print(select_df)
-            print("-"*80)
+            st.write(f"Schedule for Day : D[i]")
+            st.dataframe(select_df)
+            st.write("-----------")
 
-    st.write("Optimization completed")
