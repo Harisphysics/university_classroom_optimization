@@ -384,7 +384,7 @@ if st.session_state.generated_data :
 elif st.session_state.view_data :
     st.title("View Data")
     st.write(f"Selected tab: {selected_tab}")
-    st.write(dummy_data[selected_tab])
+    st.datafrane(dummy_data[selected_tab])
 
 elif st.session_state.run_job :
     with st.spinner("Optimization is running...") :
