@@ -378,10 +378,10 @@ if st.session_state.generated_data :
                 select_data.to_excel(writer, sheet_name=elem, index=False)
 
         st.write("Data generated successfully")
-        dummy_data = load_dummy()
         st.session_state.generated_data = False
 
 elif st.session_state.view_data :
+    dummy_data = load_dummy()
     st.title("View Data")
     st.write(f"Selected tab: {selected_tab}")
     st.datafrane(dummy_data[selected_tab])
