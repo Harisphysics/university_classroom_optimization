@@ -502,7 +502,7 @@ elif st.session_state.run_job :
         student_courses_class["jumlah"] = student_courses.values()
         data["student_courses"] = student_courses_class
 
-        with pd.ExcelWriter('data/input_data_modif.xlsx') as writer:
+        with pd.ExcelWriter('input_data_modif.xlsx') as writer:
             for elem in data.keys() :
                 select_data = data[elem]
                 select_data.to_excel(writer, sheet_name=elem, index=False)
