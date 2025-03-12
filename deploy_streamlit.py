@@ -4,21 +4,21 @@ import random
 from ortools.sat.python import cp_model
 
 # Load the data
-def create_data():
-    df_Course = pd.read_excel("data/input_data.xlsx", sheet_name="Courses")
-    D = pd.read_excel("data/input_data.xlsx", sheet_name="Days")
-    T = pd.read_excel("data/input_data.xlsx", sheet_name="Time")
-    I = pd.read_excel("data/input_data.xlsx", sheet_name="Instructors")
-    R = pd.read_excel("data/input_data.xlsx", sheet_name="Rooms")
+def load_data():
+    df_Course = pd.read_excel("input_data.xlsx", sheet_name="Courses")
+    D = pd.read_excel("input_data.xlsx", sheet_name="Days")
+    T = pd.read_excel("input_data.xlsx", sheet_name="Time")
+    I = pd.read_excel("input_data.xlsx", sheet_name="Instructors")
+    R = pd.read_excel("input_data.xlsx", sheet_name="Rooms")
 
-    instructor_df = pd.read_excel("data/input_data.xlsx", sheet_name="instructor_course")
-    enrollment_df = pd.read_excel("data/input_data.xlsx", sheet_name="enrollment")
-    room_capacity_df = pd.read_excel("data/input_data.xlsx", sheet_name="room_capacity")
-    instructor_availability_class = pd.read_excel("data/input_data.xlsx", sheet_name="instructor_availability")
+    instructor_df = pd.read_excel("input_data.xlsx", sheet_name="instructor_course")
+    enrollment_df = pd.read_excel("input_data.xlsx", sheet_name="enrollment")
+    room_capacity_df = pd.read_excel("input_data.xlsx", sheet_name="room_capacity")
+    instructor_availability_class = pd.read_excel("input_data.xlsx", sheet_name="instructor_availability")
 
-    room_availability_class = pd.read_excel("data/input_data.xlsx", sheet_name="room_availability")
+    room_availability_class = pd.read_excel("input_data.xlsx", sheet_name="room_availability")
 
-    student_courses_class = pd.read_excel("data/input_data.xlsx", sheet_name="student_courses")
+    student_courses_class = pd.read_excel("input_data.xlsx", sheet_name="student_courses")
 
     # Create a dictionary for storing dataframes to be displayed in Streamlit
     data = {}
@@ -234,8 +234,6 @@ def solve_university_class_scheduling(C, D, T, R, I, enrollment, instructor,
         print("No optimal solution found.")
         return None
 
-data = create_data()
-
 if 'generated_data' not in st.session_state:
     st.session_state.generated_data = True
 if 'view_data' not in st.session_state:
@@ -374,7 +372,7 @@ if st.session_state.generated_data :
         student_courses_class["jumlah"] = student_courses.values()
         data["student_courses"] = student_courses_class
 
-        with pd.ExcelWriter('data/input_data.xlsx') as writer:
+        with pd.ExcelWriter('input_data.xlsx') as writer:
             for elem in data.keys():
                 select_data = data[elem]
                 select_data.to_excel(writer, sheet_name=elem, index=False)
