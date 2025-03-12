@@ -4,7 +4,7 @@ import random
 from ortools.sat.python import cp_model
 
 # Load the data
-def load_data():
+def load_dummy():
     df_Course = pd.read_excel("input_data.xlsx", sheet_name="Courses")
     D = pd.read_excel("input_data.xlsx", sheet_name="Days")
     T = pd.read_excel("input_data.xlsx", sheet_name="Time")
@@ -378,18 +378,18 @@ if st.session_state.generated_data :
                 select_data.to_excel(writer, sheet_name=elem, index=False)
 
         st.write("Data generated successfully")
-        data = load_data()
+        dummy_data = load_dummy()
         st.session_state.generated_data = False
 
 elif st.session_state.view_data :
     st.title("View Data")
     st.write(f"Selected tab: {selected_tab}")
-    st.write(data[selected_tab])
+    st.write(dummy_data[selected_tab])
 
 elif st.session_state.run_job :
     with st.spinner("Optimization is running...") :
 
-        df_C = pd.read_excel("data/input_data.xlsx", sheet_name="Courses")
+        df_C = pd.read_excel("input_data.xlsx", sheet_name="Courses")
         C = df_C["Course"].astype(str) + "-1"
 
         credits_select = df_C[df_C["Credits"] > 1]
@@ -400,19 +400,19 @@ elif st.session_state.run_job :
 
         C = C.to_list() + credits_select_modif
 
-        D = pd.read_excel("data/input_data.xlsx", sheet_name="Days")
+        D = pd.read_excel("input_data.xlsx", sheet_name="Days")
         D = D[0].to_list()
 
-        T = pd.read_excel("data/input_data.xlsx", sheet_name="Time")
+        T = pd.read_excel("input_data.xlsx", sheet_name="Time")
         T = T[0].to_list()
 
-        I = pd.read_excel("data/input_data.xlsx", sheet_name="Instructors")
+        I = pd.read_excel("input_data.xlsx", sheet_name="Instructors")
         I = I[0].to_list()
 
-        R = pd.read_excel("data/input_data.xlsx", sheet_name="Rooms")
+        R = pd.read_excel("input_data.xlsx", sheet_name="Rooms")
         R = R[0].to_list()
 
-        instructor_df = pd.read_excel("data/input_data.xlsx", sheet_name="instructor_course")
+        instructor_df = pd.read_excel("input_data.xlsx", sheet_name="instructor_course")
         instructor = {}
         for row in instructor_df.values:
             if row[0] in credits_select :
@@ -421,7 +421,7 @@ elif st.session_state.run_job :
             else :
                 instructor[row[0] + "-1"] = row[1]
 
-        enrollment_df = pd.read_excel("data/input_data.xlsx", sheet_name="enrollment")
+        enrollment_df = pd.read_excel("input_data.xlsx", sheet_name="enrollment")
         enrollment = {}
         for elem in enrollment_df.values :
             if elem[0] in credits_select :
@@ -430,22 +430,22 @@ elif st.session_state.run_job :
             else :
                 enrollment[elem[0] + "-1"] = elem[1]
 
-        room_capacity_df = pd.read_excel("data/input_data.xlsx", sheet_name="room_capacity")
+        room_capacity_df = pd.read_excel("input_data.xlsx", sheet_name="room_capacity")
         room_capacity = {}
         for row in room_capacity_df.values:
             room_capacity[row[0]] = row[1]
 
-        instructor_availability_class = pd.read_excel("data/input_data.xlsx", sheet_name="instructor_availability")
+        instructor_availability_class = pd.read_excel("input_data.xlsx", sheet_name="instructor_availability")
         instructor_availability = {}
         for row in instructor_availability_class.values:
             instructor_availability[(row[0], row[1], row[2])] = row[3]
 
-        room_availability_class = pd.read_excel("data/input_data.xlsx", sheet_name="room_availability")
+        room_availability_class = pd.read_excel("input_data.xlsx", sheet_name="room_availability")
         room_availability = {}
         for row in room_availability_class.values:
             room_availability[(row[0], row[1], row[2])] = row[3]
 
-        student_courses_class = pd.read_excel("data/input_data.xlsx", sheet_name="student_courses")
+        student_courses_class = pd.read_excel("input_data.xlsx", sheet_name="student_courses")
         student_courses = {}
         for row in student_courses_class.values:
             row[1] = row[1].replace("[","").replace("]","").replace("'","").split(", ")
@@ -507,47 +507,47 @@ elif st.session_state.run_job :
                 select_data = data[elem]
                 select_data.to_excel(writer, sheet_name=elem, index=False)
 
-        C = pd.read_excel("data/input_data_modif.xlsx", sheet_name="Courses")
+        C = pd.read_excel("input_data_modif.xlsx", sheet_name="Courses")
         C = C[0].to_list()
 
-        D = pd.read_excel("data/input_data_modif.xlsx", sheet_name="Days")
+        D = pd.read_excel("input_data_modif.xlsx", sheet_name="Days")
         D = D[0].to_list()
 
-        T = pd.read_excel("data/input_data_modif.xlsx", sheet_name="Time")
+        T = pd.read_excel("input_data_modif.xlsx", sheet_name="Time")
         T = T[0].to_list()
 
-        I = pd.read_excel("data/input_data_modif.xlsx", sheet_name="Instructors")
+        I = pd.read_excel("input_data_modif.xlsx", sheet_name="Instructors")
         I = I[0].to_list()
 
-        R = pd.read_excel("data/input_data_modif.xlsx", sheet_name="Rooms")
+        R = pd.read_excel("input_data_modif.xlsx", sheet_name="Rooms")
         R = R[0].to_list()
 
-        instructor_df = pd.read_excel("data/input_data_modif.xlsx", sheet_name="instructor_course")
+        instructor_df = pd.read_excel("input_data_modif.xlsx", sheet_name="instructor_course")
         instructor = {}
         for row in instructor_df.values:
             instructor[row[0]] = row[1]
 
-        enrollment_df = pd.read_excel("data/input_data_modif.xlsx", sheet_name="enrollment")
+        enrollment_df = pd.read_excel("input_data_modif.xlsx", sheet_name="enrollment")
         enrollment = {}
         for row in enrollment_df.values:
             enrollment[row[0]] = row[1]
 
-        capacity_df = pd.read_excel("data/input_data_modif.xlsx", sheet_name="room_capacity")
+        capacity_df = pd.read_excel("input_data_modif.xlsx", sheet_name="room_capacity")
         room_capacity = {}
         for row in capacity_df.values:
             room_capacity[row[0]] = row[1]
 
-        instructor_availability_class = pd.read_excel("data/input_data_modif.xlsx", sheet_name="instructor_availability")
+        instructor_availability_class = pd.read_excel("input_data_modif.xlsx", sheet_name="instructor_availability")
         instructor_availability = {}
         for row in instructor_availability_class.values:
             instructor_availability[(row[0], row[1], row[2])] = row[3]
 
-        room_availability_class = pd.read_excel("data/input_data_modif.xlsx", sheet_name="room_availability")
+        room_availability_class = pd.read_excel("input_data_modif.xlsx", sheet_name="room_availability")
         room_availability = {}
         for row in room_availability_class.values:
             room_availability[(row[0], row[1], row[2])] = row[3]
 
-        student_courses_class = pd.read_excel("data/input_data_modif.xlsx", sheet_name="student_courses")
+        student_courses_class = pd.read_excel("input_data_modif.xlsx", sheet_name="student_courses")
         student_courses = {}
         for row in student_courses_class.values:
             row[1] = row[1].replace("[","").replace("]","").replace("'","").split(", ")
