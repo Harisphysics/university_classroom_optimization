@@ -562,15 +562,18 @@ elif st.session_state.run_job :
         st.write("Optimization completed")
         
         st.title("Optimization Result")
-        for i in range(5) :
-            select_df = df_result[df_result["Day"] == D[i]].reset_index(drop=True)
-            select_df["index"] = select_df["index"] + "_" + select_df["Instructor"]
-            select_df = select_df.drop(["Day","Instructor"], axis=1)
-            select_df = select_df.pivot(index="Room", columns="Time", values="index")
-            st.write(f"Schedule for Day : {D[i]}")
-            st.dataframe(select_df)
-            st.write("-----------")
-
+        for i in range(len(D) :
+            try :
+                select_df = df_result[df_result["Day"] == D[i]].reset_index(drop=True)
+                select_df["index"] = select_df["index"] + "_" + select_df["Instructor"]
+                select_df = select_df.drop(["Day","Instructor"], axis=1)
+                select_df = select_df.pivot(index="Room", columns="Time", values="index")
+                st.write(f"Schedule for Day : {D[i]}")
+                st.dataframe(select_df)
+                st.write("-----------")
+            except :
+                pass
+                
         unscheduled_df = pd.DataFrame(unscheduled, columns=["Unscheduled Course"])
         st.write("Unschedule Course")
         st.dataframe(unscheduled_df)
