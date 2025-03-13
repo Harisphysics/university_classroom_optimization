@@ -294,10 +294,10 @@ if st.session_state.generated_data :
         credits_df.to_excel('data/credits.xlsx', index=False)
 
         # Days
-        D = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+        D = [f'Day-{i+1}' for i in range(num_days)]
 
         # Time slots
-        T = ['Sesi-1', 'Sesi-2', 'Sesi-3', 'Sesi-4', 'Sesi-5', 'Sesi-6', 'Sesi-7', 'Sesi-8']
+        T = [f'Time-{i+1}' for i in range(num_time_slots)]
 
         # Rooms
         R = [f'Room{i+1}' for i in range(num_rooms)]
@@ -315,7 +315,7 @@ if st.session_state.generated_data :
         enrollment = {course: random.randint(10, 50) for course in C}
 
         # Assign room capacities (30 to 100)
-        room_capacity = {room: random.randint(30, 100) for room in R}
+        room_capacity = {room: random.randint(30, 80) for room in R}
 
         # Generate instructor availability
         instructor_availability = {}
