@@ -321,7 +321,7 @@ if st.session_state.generated_data :
         instructor_availability = {}
         for instruct in I:
             for day in D:
-                if random.random() <= 1:
+                if random.random() <= 0.7:
                     for time in T:
                         instructor_availability[(instruct, day, time)] = 1
 
