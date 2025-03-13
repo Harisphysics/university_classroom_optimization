@@ -562,7 +562,7 @@ elif st.session_state.run_job :
         st.write("Optimization completed")
         
         st.title("Optimization Result")
-        for i in range(len(D) :
+        for i in range(len(D)) :
             try :
                 select_df = df_result[df_result["Day"] == D[i]].reset_index(drop=True)
                 select_df["index"] = select_df["index"] + "_" + select_df["Instructor"]
